@@ -3,6 +3,7 @@ import edu.school21.cinema.models.User;
 import edu.school21.cinema.repositories.UserRepositoryImpl;
 import edu.school21.cinema.services.UserValidatorService;
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -22,6 +23,8 @@ public class SignUp extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ServletContext cntx = getServletContext();
+        String p = cntx.getInitParameter("myParam");
         final String name = req.getParameter("name");
         final String lastName = req.getParameter("lastName");
         final String phoneNumber = req.getParameter("phoneNumber");
@@ -31,7 +34,7 @@ public class SignUp extends HttpServlet {
             UserValidatorService.throwIfNotValid(user);
         } catch (IllegalArgumentException e) {
             PrintWriter pw = resp.getWriter();
-            pw.write(e.getMessage());
+            pw.write(e.getMessage() + p);
             return;
         }
         userRepository.save(user);

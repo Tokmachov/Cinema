@@ -18,4 +18,18 @@
         <servlet-name>signIn</servlet-name>
         <url-pattern>/signIn</url-pattern>
     </servlet-mapping>
+
+    <context-param>
+        <param-name>myParam</param-name>
+        <param-value>Hello</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>edu.school21.cinema.listeners.CinemaServletContextListener</listener-class>
+    </listener>
+
+    <context-param>
+        <param-name>schemaDefinitionFile</param-name>
+        <param-value>schema.sql</param-value>
+    </context-param>
 </web-app>
