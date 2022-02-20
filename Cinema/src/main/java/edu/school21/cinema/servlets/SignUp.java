@@ -1,19 +1,30 @@
 package edu.school21.cinema.servlets;
+import edu.school21.cinema.config.ServletContextAttributes;
 import edu.school21.cinema.models.User;
-import edu.school21.cinema.repositories.UserRepositoryImpl;
-import edu.school21.cinema.services.UserValidatorService;
+import edu.school21.cinema.services.UserService;
 import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.context.ApplicationContext;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 
 public class SignUp extends HttpServlet {
-    UserRepositoryImpl userRepository = new UserRepositoryImpl();
+
+    private UserService userService;
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        ServletContext servletContext = config.getServletContext();
+        ApplicationContext applicationContext = (ApplicationContext)servletContext.getAttribute(ServletContextAttributes.SPRING_CONTEXT);
+        userService = applicationContext.getBean(UserService.class);
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -23,21 +34,22 @@ public class SignUp extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ServletContext cntx = getServletContext();
-        String p = cntx.getInitParameter("myParam");
-        final String name = req.getParameter("name");
-        final String lastName = req.getParameter("lastName");
-        final String phoneNumber = req.getParameter("phoneNumber");
-        final String passWord = req.getParameter("passWord");
-        final User user = new User(name, lastName, phoneNumber, passWord);
+        User user = extractUser(req);
         try {
-            UserValidatorService.throwIfNotValid(user);
-        } catch (IllegalArgumentException e) {
-            PrintWriter pw = resp.getWriter();
-            pw.write(e.getMessage() + p);
+            userService.save(user);
+        } catch (Exception e) {
+            PrintWriter printWriter = resp.getWriter();
+            printWriter.write(e.getMessage());
             return;
         }
-        userRepository.save(user);
+
         resp.sendRedirect("signIn");
+    }
+    private User extractUser(HttpServletRequest req) {
+        String name = req.getParameter("name");
+        String lastName = req.getParameter("lastName");
+        String phoneNumber = req.getParameter("phoneNumber");
+        String passWord = req.getParameter("passWord");
+        return new User(name, lastName, phoneNumber, passWord);
     }
 }

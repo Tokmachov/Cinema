@@ -5,5 +5,3 @@ edu/school21/cinema/config/ServletContextAttributes.class
 edu/school21/cinema/listeners/CinemaServletContextListener.class
 edu/school21/cinema/servlets/SignUp.class
 edu/school21/cinema/repositories/Repository.class
-edu/school21/cinema/services/UserValidatorService.class
-edu/school21/cinema/repositories/UserRepositoryImpl.class

@@ -1,9 +1,9 @@
 /Users/oleg/Desktop/Cinema/Cinema/src/main/java/edu/school21/cinema/servlets/SignUp.java
 /Users/oleg/Desktop/Cinema/Cinema/src/main/java/edu/school21/cinema/repositories/Repository.java
-/Users/oleg/Desktop/Cinema/Cinema/src/main/java/edu/school21/cinema/services/UserValidatorService.java
-/Users/oleg/Desktop/Cinema/Cinema/src/main/java/edu/school21/cinema/repositories/UserRepositoryImpl.java
+/Users/oleg/Desktop/Cinema/Cinema/src/main/java/edu/school21/cinema/repositories/UserRepository.java
 /Users/oleg/Desktop/Cinema/Cinema/src/main/java/edu/school21/cinema/listeners/CinemaServletContextListener.java
 /Users/oleg/Desktop/Cinema/Cinema/src/main/java/edu/school21/cinema/config/ServletContextAttributes.java
+/Users/oleg/Desktop/Cinema/Cinema/src/main/java/edu/school21/cinema/services/UserService.java
 /Users/oleg/Desktop/Cinema/Cinema/src/main/java/edu/school21/cinema/config/Config.java
 /Users/oleg/Desktop/Cinema/Cinema/src/main/java/edu/school21/cinema/models/User.java
 /Users/oleg/Desktop/Cinema/Cinema/src/main/java/edu/school21/cinema/servlets/SignIn.java

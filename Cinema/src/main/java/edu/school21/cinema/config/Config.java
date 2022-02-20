@@ -1,5 +1,7 @@
 package edu.school21.cinema.config;
 
+import edu.school21.cinema.repositories.UserRepository;
+import edu.school21.cinema.services.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -40,5 +42,15 @@ public class Config {
         JdbcTemplate jdbcTemplate = new JdbcTemplate();
         jdbcTemplate.setDataSource(dataSource());
         return jdbcTemplate;
+    }
+
+    @Bean
+    public UserRepository userRepository() {
+        return new UserRepository(jdbcTemplate());
+    }
+
+    @Bean
+    public UserService userService() {
+        return new UserService(userRepository());
     }
 }
