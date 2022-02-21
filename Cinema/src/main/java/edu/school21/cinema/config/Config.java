@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @Configuration
 @PropertySource("application.properties")
@@ -50,7 +51,14 @@ public class Config {
     }
 
     @Bean
-    public UserService userService() {
-        return new UserService(userRepository());
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
     }
+
+    @Bean
+    public UserService userService() {
+        return new UserService(userRepository(), bCryptPasswordEncoder());
+    }
+
+
 }
