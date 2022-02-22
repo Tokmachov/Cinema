@@ -42,9 +42,9 @@ public class SignUp extends HttpServlet {
             printWriter.write(e.getMessage());
             return;
         }
-
         resp.sendRedirect("signIn");
     }
+
     private User extractUser(HttpServletRequest req) {
         String name = req.getParameter("name");
         String lastName = req.getParameter("lastName");
