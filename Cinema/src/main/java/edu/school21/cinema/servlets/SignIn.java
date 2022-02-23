@@ -10,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.ApplicationContext;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,6 +18,7 @@ import java.util.Optional;
 
 public class SignIn extends HttpServlet {
     private UserRepository userRepository;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -24,6 +26,7 @@ public class SignIn extends HttpServlet {
         ServletContext servletContext = config.getServletContext();
         ApplicationContext applicationContext = (ApplicationContext)servletContext.getAttribute(ServletContextAttributes.SPRING_CONTEXT);
         userRepository = applicationContext.getBean(UserRepository.class);
+        bCryptPasswordEncoder = applicationContext.getBean(BCryptPasswordEncoder.class);
     }
 
     @Override
@@ -38,8 +41,9 @@ public class SignIn extends HttpServlet {
         final String passWord = req.getParameter("passWord");
         Optional<User> user = userRepository.findByPhoneNumber(phoneNumber);
         PrintWriter pw = resp.getWriter();
-        if (user.isPresent()) {
-            pw.write("User is found.");
+
+        if (user.isPresent() && bCryptPasswordEncoder.matches(passWord, user.get().getPassword())) {
+            pw.write("Password correct and user is found.");
         } else {
             pw.write("user is not found.");
         }

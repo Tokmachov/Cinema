@@ -35,7 +35,7 @@ public class UserRepository implements Repository<User> {
             String name = rs.getString("first_name");
             String lastname = rs.getString("last_name");
             String password = rs.getString("password");
-            return new User(name, lastname, phoneNumber, null);
+            return new User(name, lastname, phoneNumber, password);
         }, phoneNumber);
         return !users.isEmpty() ? Optional.of(users.get(0)) : Optional.empty();
     }
