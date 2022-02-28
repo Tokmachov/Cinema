@@ -9,6 +9,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.context.ApplicationContext;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -31,7 +32,7 @@ public class SignIn extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/html/signIn.html");
+        RequestDispatcher rd = req.getRequestDispatcher("/html/signIn.html");
         rd.forward(req, resp);
     }
 
@@ -40,12 +41,13 @@ public class SignIn extends HttpServlet {
         final String phoneNumber = req.getParameter("phoneNumber");
         final String passWord = req.getParameter("passWord");
         Optional<User> user = userRepository.findByPhoneNumber(phoneNumber);
-        PrintWriter pw = resp.getWriter();
 
         if (user.isPresent() && bCryptPasswordEncoder.matches(passWord, user.get().getPassword())) {
-            pw.write("Password correct and user is found.");
+            HttpSession session = req.getSession(true);
+            session.setAttribute("user", user);
+            resp.sendRedirect(req.getContextPath() + "/html/profile.html");
         } else {
-            pw.write("user is not found.");
+            resp.sendRedirect(req.getContextPath() + "/signUp");
         }
     }
 }

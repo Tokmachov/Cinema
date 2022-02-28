@@ -3,9 +3,7 @@ package edu.school21.cinema.repositories;
 import edu.school21.cinema.models.User;
 import org.springframework.jdbc.core.JdbcTemplate;
 
-import javax.swing.text.html.Option;
 import java.sql.ResultSet;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
