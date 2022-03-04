@@ -1,0 +1,61 @@
+<web-app>
+    <servlet>
+        <servlet-name>signUp</servlet-name>
+        <servlet-class>edu.school21.cinema.servlets.SignUp</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>signIn</servlet-name>
+        <servlet-class>edu.school21.cinema.servlets.SignIn</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>profile</servlet-name>
+        <servlet-class>edu.school21.cinema.servlets.Profile</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>signUp</servlet-name>
+        <url-pattern>/signUp</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>signIn</servlet-name>
+        <url-pattern>/signIn</url-pattern>
+    </servlet-mapping>
+
+    <servlet-mapping>
+        <servlet-name>profile</servlet-name>
+        <url-pattern>/profile</url-pattern>
+    </servlet-mapping>
+
+    <listener>
+        <listener-class>edu.school21.cinema.listeners.CinemaServletContextListener</listener-class>
+    </listener>
+
+    <context-param>
+        <param-name>schemaDefinitionFile</param-name>
+        <param-value>sql/schema.sql</param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>AuthorizationFilter</filter-name>
+        <filter-class>edu.school21.cinema.filters.AuthorizationFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>AuthorizationFilter</filter-name>
+        <url-pattern>/profile</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>ProfileRedirectFilter</filter-name>
+        <filter-class>edu.school21.cinema.filters.ProfileRedirectFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>ProfileRedirectFilter</filter-name>
+        <url-pattern>/signIn</url-pattern>
+        <url-pattern>/signUp</url-pattern>
+    </filter-mapping>
+</web-app>
