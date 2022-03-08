@@ -50,6 +50,6 @@ public class SignUp extends HttpServlet {
         String lastName = req.getParameter("lastName");
         String phoneNumber = req.getParameter("phoneNumber");
         String passWord = req.getParameter("passWord");
-        return new User(name, lastName, phoneNumber, passWord);
+        return new User(null, name, lastName, phoneNumber, passWord);
     }
 }

@@ -1,6 +1,9 @@
 package edu.school21.cinema.config;
 
+import edu.school21.cinema.models.UserAuthentication;
+import edu.school21.cinema.repositories.UserAuthenticationRepository;
 import edu.school21.cinema.repositories.UserRepository;
+import edu.school21.cinema.services.UserAuthenticationService;
 import edu.school21.cinema.services.UserService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -60,5 +63,13 @@ public class Config {
         return new UserService(userRepository(), bCryptPasswordEncoder());
     }
 
+    @Bean
+    public UserAuthenticationRepository userAuthenticationRepository() {
+        return new UserAuthenticationRepository(jdbcTemplate());
+    }
 
+    @Bean
+    public UserAuthenticationService userAuthenticationService() {
+        return new UserAuthenticationService(userAuthenticationRepository());
+    }
 }

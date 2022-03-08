@@ -13,11 +13,11 @@ public class ProfileRedirectFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
         HttpSession session = request.getSession(false);
-        if (session == null || session.getAttribute("user") == null) {
-            filterChain.doFilter(servletRequest, servletResponse);
-        } else {
+        if (session != null && session.getAttribute("user") != null) {
             HttpServletResponse response = (HttpServletResponse) servletResponse;
             response.sendRedirect(request.getContextPath() + "/profile");
+        } else {
+            filterChain.doFilter(servletRequest, servletResponse);
         }
     }
 }

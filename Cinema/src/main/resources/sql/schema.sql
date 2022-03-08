@@ -10,8 +10,8 @@ CREATE TABLE IF NOT EXISTS cinema.user (
 
 create table if not exists cinema.user_authentications (
     id serial primary key,
-    date_and_time timestamptz,
+    date_and_time timestamptz not null,
     user_id int not null,
-    address int,
+    address text not null,
     constraint fk_user foreign key (user_id) references cinema.user (id)
 );

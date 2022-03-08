@@ -4,6 +4,8 @@ import edu.school21.cinema.models.User;
 import edu.school21.cinema.repositories.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import java.util.Optional;
+
 public class UserService {
     private UserRepository userRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -17,6 +19,13 @@ public class UserService {
         throwIfNotValid(user);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
+    }
+    public Optional<User> findByPhoneNumber(String phoneNumber) {
+        return userRepository.findByPhoneNumber(phoneNumber);
+    }
+
+    public boolean isCorrectPassword(User user, String passWord) {
+        return bCryptPasswordEncoder.matches(passWord, user.getPassword());
     }
 
     private static void throwIfNotValid(User user) {
