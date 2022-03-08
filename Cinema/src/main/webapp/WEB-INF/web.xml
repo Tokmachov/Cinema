@@ -29,6 +29,16 @@
         <url-pattern>/profile</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>AvatarUploader</servlet-name>
+        <servlet-class>edu.school21.cinema.servlets.AvatarUploader</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>AvatarUploader</servlet-name>
+        <url-pattern>/avatar/upload/url</url-pattern>
+    </servlet-mapping>
+
     <listener>
         <listener-class>edu.school21.cinema.listeners.CinemaServletContextListener</listener-class>
     </listener>
@@ -36,6 +46,11 @@
     <context-param>
         <param-name>schemaDefinitionFile</param-name>
         <param-value>sql/schema.sql</param-value>
+    </context-param>
+
+    <context-param>
+        <param-name>avatarsDir</param-name>
+        <param-value>/Users/oleg/Desktop/Cinema/images/avatars</param-value>
     </context-param>
 
     <filter>

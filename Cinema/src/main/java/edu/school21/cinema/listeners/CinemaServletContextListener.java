@@ -9,8 +9,12 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.jdbc.core.JdbcTemplate;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -21,6 +25,7 @@ public class CinemaServletContextListener implements ServletContextListener {
         ServletContextListener.super.contextInitialized(sce);
 
         ApplicationContext context = new AnnotationConfigApplicationContext(Config.class);
+
         ServletContext servletContext = sce.getServletContext();
         servletContext.setAttribute(ServletContextAttributes.SPRING_CONTEXT, context);
 

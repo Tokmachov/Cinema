@@ -19,5 +19,6 @@ public class AuthorizationFilter implements Filter {
             HttpServletResponse response = (HttpServletResponse) servletResponse;
             response.sendError(403);
         }
+
     }
 }
