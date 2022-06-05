@@ -1,7 +1,6 @@
-#!/bin/sh
-CinemaDir=$1
-TomCatDir=$2
-mvn -f $CinemaDir/pom.xml clean install
-cp $CinemaDir/target/Cinema-1.0.war $TomCatDir/webapps
-$TomCatDir/bin/shutdown.sh
-$TomCatDir/bin/startup.sh
+mvn clean -f $1/pom.xml
+mvn package -f $1/pom.xml
+mv $1/target/cinema.war $2/webapps/
+chmod 777 $2/bin/startup.sh
+chmod 777 $2/bin/catalina.sh
+./$2/bin/startup.sh
