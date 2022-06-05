@@ -8,8 +8,10 @@ curl http://archive.apache.org/dist/tomcat/tomcat-10/v10.0.14/bin/apache-tomcat-
 
 unzip tomcat.zip
 
-# 4 to start server and app run script deploy_cinema.sh with 2 parameters: 1 - apache tomcat dir 2 - Cinema dir
-# 5 to shut down server and app - run shutdown_cinema.sh with 1 parameter: apache tomcat dir
+# 4 open /Cinema/src/main/resources/application.properties and fill images.storage.path property with dir where app will store user avatars
+
+# 5 to start server and app run script deploy_cinema.sh with 2 parameters: 1 - apache tomcat dir 2 - Cinema dir
+# 6 to shut down server and app - run shutdown_cinema.sh with 1 parameter: apache tomcat dir
 
 
 
